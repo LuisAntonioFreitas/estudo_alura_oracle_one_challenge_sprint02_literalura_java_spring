@@ -1,0 +1,6 @@
+# Spring Boot configuration
+spring:
+  application:
+    name: literalura
+  profiles:
+    active: ${APP_PROFILE:dev}
