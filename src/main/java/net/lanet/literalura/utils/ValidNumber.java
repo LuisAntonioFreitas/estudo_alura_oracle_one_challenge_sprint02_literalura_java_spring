@@ -1,7 +1,10 @@
 package net.lanet.literalura.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class ValidNumber {
     public static int getValidInteger(Scanner scanner, Integer limit) {
 
