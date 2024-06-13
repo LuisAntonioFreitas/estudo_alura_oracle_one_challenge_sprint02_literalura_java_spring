@@ -23,7 +23,9 @@
   <a alt="Java">
     <img src="https://img.shields.io/badge/Java-%23FFAA4A.svg?logoColor=000&style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAxxJREFUWIXF112IlGUUB/Dfrlumsju2gboRRRsZGJGkJGhYF0VEFBaBIAVFYRdB3ZVIdCOoXUiI6IUIgnhjhVIUEllREEUQUtGHBZLaF+ZX6brmTjtdnDPOu9OOOzPs6B9e3neeeZ/zP895zvmf52XyMLedSd2T6MAzk2irZQzgNLouB3kP3sOJy0E+FW+igu2XmnwOPk3yv3BD4b8S7sL0TpHfiV+SvIxlmIEX8AW+w6JOkT+Ms0n+L57Gffg1x3bo4MqX4p8C+UoswTmM4pVOEVfxfZJX8FKOVfNgR6fJSwXyD3LsCpEDFTzVjtFWlPBv/J7Pu/Jexpl8frQdB6a0+H63SLifsTfHqiV3Mz7E4XYcaRY9+ETUfSnHpqnlxu5OklfRj/14uTD2UDrwWavG2umGJ3AP7sCsHDuY99fbsNcQs/Cc0Ph9WJ2kVad7cFs+v4a1xnbDbqzA1/gWT4xH0qh9zhH7OjN/v4EtYvVnheh0iWbUjxsxlPOuxQg2iAoZwMcYFIeWarQuiquwUyhcpcmrjJ+wUfSFItbnO8uajUAV00WYF6b3R0RoR0QkTuGoaEyHcL6Bnfdxr9jC/RNw/g8rRHi3qSVdEV24Ho+IY1lP3f/3iy37qFXiKtalgUre/8SP+EFEpH6b3hFbCPNF3uzDNeMZb/YMNw8P4Hax2pJY6TkcF8r4jWhMX6UjC0WrfltNNdvGoFDArWqrk04M4jFsEns8KRjA3UJwevGqsdl+XCRg2djwj4hcqEfTp+XZ4oQ7miQbxOpKeFHs5WFR38M4JkRmD1bh1gZ23xWaMSHWqK1mTbNeXwRXiuiVRVQnxC34TS3j9wo5XoSrm5g/VSTscmwW54chPFt4p684Yby9KeWE5aKMig3rjAj7aVEBRCL2poP9aXMEX4oK2I4/0rlVQuIvNK2JkqMkSm8urhO1PFOEdkoSDeOkmiIeEHkxnDZm43E8j7fyfgH1qlWPISE8fbnygyIJTzV4v1d8oDyIBaKSFggVfNI4atjKx+QAFguBuUlEo09EaUZeoyISR0QUPhfHtKONjP4HxJ7K18iRRpEAAAAASUVORK5CYII=" />
   </a>
-  
+  <a alt="Spring">
+    <img src="https://img.shields.io/badge/Spring-6DB33F?logo=spring&logoColor=fff&style=flat-square" />
+  </a>
 </p>
 
 <p align="center">
@@ -47,20 +49,20 @@
 
 ## 📋 Recursos<a id="recursos"></a>
 
-* Converte valores entre moedas.
+* LiterAlura é um catálogo de livros.
 
 > **Nota**
 >
-> * Só são aceitos números.
-> * Opção de visualizar o histórico de conversões.
-> * Opção para salvar em arquivo texto o histórico de coversões.
-> * Consumo dos dados da API (ExchangeRate-API) para obter as taxas de câmbio atualizadas.
+> * Só são aceitos números no menu inicial.
+> * Opção para salvar as informações em banco de dados.
+> * Diversas opções de visualização das informações registradas no banco de dados.
+> * Consume dados da API (Gutendex) para obter as informações sobre os livros.
 
 ---
 
 ## 🧭 Funcionamento<a id="funcionamento"></a>
 
-* Oferece um menu interativo com opções de moedas de origem e destino, basta digitar a opção desejada e depois informar o valor para conversão. 
+* Oferece um menu interativo com opções para manipular a aplicação, basta digitar a opção desejada e depois seguir as orientações particulares a cada item. 
 
 <!-- ```bash
 # Clone this repository
@@ -77,21 +79,23 @@ $ npm start
 ```
 
 > **Nota**
-> É possível acompanhar esse passo-a-passo, [neste guia](https://www/) ou usar o `node` via prompt de comando. -->
+> É possível acompanhar esse passo-a-passo, [neste guia](https://www/) ou usar o `node` via prompt de comando. 
+-->
 
 ---
 
 ## 🏅 Desafio<a id="desafio"></a>
 
-* Desenvolver um Conversor de Moedas que ofereça interação textual (via console) com os usuários, proporcionando no mínimo 6 opções distintas de conversões de moedas em um menu. A taxa de conversão não será estática, mas sim dinamicamente obtida por meio de uma API, garantindo dados precisos e em tempo real para uma experiência mais atualizada e eficaz.
-* Os passos para completar este desafio serão detalhados a seguir e estarão disponíveis na seção adjacente:  
-  * Configuração do Ambiente Java;  
-  * Criação do Projeto;  
-  * Consumo da API;  
-  * Análise da Resposta JSON;  
-  * Filtro de Moedas;  
-  * Exibição de Resultados aos Usuários;  
-* Prepare-se para se envolver em uma experiência prática e emocionante no desenvolvimento Java!
+* Neste emocionante desafio de programação, lhe convidamos a construir seu próprio catálogo de livros: o LiterAlura. Você aprenderá a realizar solicitações a uma API de livros, manipular dados JSON, armazená-los em um banco de dados e, por fim, a filtrar e mostrar os livros e autores de interesse.
+* OBJETIVO: Desenvolver um Catálogo de Livros que ofereça interação textual (via console) com os usuários, proporcionando no mínimo 5 opções de interação. Os livros serão buscados através de uma API específica. As informações sobre a API e as opções de interação com o usuário serão detalhadas na coluna “Backlog”/”Pronto para iniciar”.
+* Os passos para completar este desafio serão detalhados a seguir e estarão disponíveis na próxima seção:
+  * Configuração do ambiente Java;
+  * Criação do Projeto;
+  * Consumo da API;
+  * Análise da Resposta JSON;
+  * Inserção e consulta no banco de dados;
+  * Exibição de resultados aos usuários;
+* Prepare-se para mergulhar em uma experiencia prática e emocionante no desenvolvimento Java!
 * Vamos trabalhar com o sistema ágil de desenvolvimento utilizando o Trello da seguinte forma:  
   * A coluna "Pronto pra iniciar" apresenta os cartões com os elementos ainda não desenvolvidos;
   * Já na coluna "Desenvolvendo" ficarão os elementos que você estiver desenvolvendo no momento. Ao iniciar uma tarefa, você poderá mover o cartão que contém a tarefa para esta coluna.
@@ -99,18 +103,22 @@ $ npm start
   * Por fim, a coluna "Concluído" terá os elementos já concluídos.
 * O Trello é uma ferramenta de uso individual para você controlar o andamento das suas atividades, mas ela não será avaliada.
 * **Extras**  
-  Excelente! Caso deseje se desafiar ainda mais e proporcionar aos usuários uma experiência mais rica e personalizada, existem várias funcionalidades interessantes que você pode explorar:  
-  * Histórico de Conversões: Adicione a capacidade de rastrear e exibir o histórico das últimas conversões realizadas, oferecendo aos usuários uma visão completa de suas atividades.  
-  * Suporte para Mais Moedas: Expanda a lista de moedas disponíveis para escolha, permitindo que os usuários convertam entre uma variedade ainda maior de opções monetárias.  
-  * Registros de Logs: Utilize as funções da biblioteca java.time para criar registros que registrem as conversões realizadas, incluindo informações sobre quais moedas foram convertidas e em que momento.
-
+  Excelente! Você concluiu o seu projeto!
+  Caso queira se desafiar ainda mais e proporcionar aos usuários uma experiência mais rica e personalizada, existem diversas funcionalidades interessantes que você pode explorar:
+  * Gerando estatísticas: Começamos as sugestões de funcionalidades opcionais lembrando da classe DoubleSummaryStatistics, usada para obter dados estatísticos de um objeto Java. É possível obter esses dados seja de consultas na API ou no banco de dados.
+  * Top 10 livros mais baixados: Assim como foi apresentado no curso Java: trabalhando com lambdas, streams e Spring Framework, é possível apresentar os dados dos 10 livros mais baixados, sendo uma consulta diretamente feita na API ou no banco de dados.
+  * Buscar autor por nome: Se você deu uma olhada no site da API, é possível realizar a busca por livro ou autor com a consulta feita com search? - no entanto, neste caso, desafiamos você a realizar a consulta por nome de autor no banco de dados criado para nosso projeto.
+  * Listar autores com outras consultas: Aqui deixamos como sugestão implementar outras consultas com os atributos de ano de nascimento e falecimento dos autores. Sinta-se livre para explorar e implementar essas características adicionais.
+  
   Desafie-se a implementar essas características e torne seu projeto uma ferramenta ainda mais poderosa e versátil!
 
 > **Bônus Adicionados e Observações**
 >
-> * São no total 14 opções para conversão de moedas. 
-> * Registro do histórico de conversões.
-> * Arquivo texto que pode ser salvo com o histórico das conversões, detalhado com data e hora em que foram realizadas.
+> * São um total de 9 opções no menu. 
+> * Foram adicionadas opções de listar os top 5 livros mais baixados, buscar livros e autores registrados no banco de dados.
+> * Além disso, opções durante o funcionamento da aplicação também foram adicionadas, como registrar os dados apenas se desejar, buscar novamente livros sem a necessidade de voltar ao menu inicial.
+> * O banco de dados utilizado foi o MySQL.
+> * Apliquei o conceito de variáveis de ambiente e a utilização inteligente das "Applications Properties", definindo diversos dados e separando entre dev e production.
 
 <!--
 
