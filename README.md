@@ -115,8 +115,9 @@ $ npm start
 > **Bônus Adicionados e Observações**
 >
 > * São um total de 9 opções no menu. 
-> * Foram adicionadas opções de listar os top 5 livros mais baixados, buscar livros e autores registrados no banco de dados.
+> * Foram adicionadas opções extras de listar os top 5 livros mais baixados, buscar livros e autores registrados no banco de dados.
 > * Além disso, opções durante o funcionamento da aplicação também foram adicionadas, como registrar os dados apenas se desejar, buscar novamente livros sem a necessidade de voltar ao menu inicial.
+> * Optei por aplicar aos autores e aos idiomas a utilização de tabelas intermediárias para relacionamento, para que fosse possível associar mais de um autor, assim como mais de um idioma a um livro. 
 > * O banco de dados utilizado foi o MySQL.
 > * Apliquei o conceito de variáveis de ambiente e a utilização inteligente das "Applications Properties", definindo diversos dados e separando entre dev e production.
 
