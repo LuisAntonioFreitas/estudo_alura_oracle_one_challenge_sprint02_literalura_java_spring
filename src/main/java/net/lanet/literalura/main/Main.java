@@ -2,17 +2,18 @@ package net.lanet.literalura.main;
 
 import net.lanet.literalura.service.*;
 import net.lanet.literalura.utils.ValidNumber;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
 public class Main {
 
-    private IMenuService menuService = new MenuService();
+    private final MenuService menuService;
+    private final Scanner scanner = new Scanner(System.in);
 
-    private Scanner scanner = new Scanner(System.in);
+    public Main(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
     public final static String URL_BASE = "https://gutendex.com/books/";
     public final static String DISPLAY_LIVROS = """
             ----- LIVRO -----
@@ -20,6 +21,11 @@ public class Main {
             Autor(es): %s
             Idioma(s): %s
             Downloads: %d""";
+    public final static String DISPLAY_AUTORES = """
+            ----- AUTOR -----
+            Nome       : %s
+            Nascimento : %d
+            Falecimento: %d""";
 
     public void viewMenu() {
 
@@ -48,26 +54,27 @@ public class Main {
                 case 1:
                     // Buscar livro pelo título (API)
                     menuService.buscarLivroPeloTitulo(scanner);
+//                    buscarLivroPeloTitulo(scanner);
                     break;
                 case 2:
                     // Listar livros registrados
-                    listarLivrosRegistrados();
+                    menuService.listarLivrosRegistrados();
                     break;
                 case 3:
                     // Listar autores registrados
-                    listarAuroresRegistrados();
+                    menuService.listarAuroresRegistrados();
                     break;
                 case 4:
                     // Listar autores vivos em um determinado ano
-                    listarAutoresVivosEmUmDeterminadoAno();
+                    menuService.listarAutoresVivosEmUmDeterminadoAno(scanner);
                     break;
                 case 5:
                     // Listar livros em um determinado idioma
-                    listarLivrosEmUmDeterminadoIdioma();
+                    menuService.listarLivrosEmUmDeterminadoIdioma(scanner);
                     break;
                 case 6:
                     // Listar Top 5 livros mais baixados
-                    listarTop5LivrosMaisBaixados();
+                    menuService.listarTop5LivrosMaisBaixados();
                     break;
                 case 7:
                     // Sair;
@@ -82,21 +89,6 @@ public class Main {
 
         }
 
-    }
-
-    private void listarLivrosRegistrados() {
-    }
-
-    private void listarAuroresRegistrados() {
-    }
-
-    private void listarLivrosEmUmDeterminadoIdioma() {
-    }
-
-    private void listarAutoresVivosEmUmDeterminadoAno() {
-    }
-
-    private void listarTop5LivrosMaisBaixados() {
     }
 
 }

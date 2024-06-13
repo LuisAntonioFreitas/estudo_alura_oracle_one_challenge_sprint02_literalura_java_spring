@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class ConvertsData implements IConvertsData {
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private ModelMapper modelMapper = new ModelMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public <T> T getDataJsonToClass(String json, Class<T> modelTarget) {

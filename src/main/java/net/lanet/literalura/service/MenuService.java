@@ -6,23 +6,36 @@ import net.lanet.literalura.entity.Autor;
 import net.lanet.literalura.entity.Idioma;
 import net.lanet.literalura.entity.Livro;
 import net.lanet.literalura.enums.SimNao;
+import net.lanet.literalura.repository.IAutorRepository;
+import net.lanet.literalura.repository.IIdiomaRepository;
+import net.lanet.literalura.repository.ILivroRepository;
 import net.lanet.literalura.utils.ValidEnum;
+import net.lanet.literalura.utils.ValidNumber;
 import net.lanet.literalura.utils.ValidString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.time.Year;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import static net.lanet.literalura.main.Main.URL_BASE;
 
 @Service
+@Transactional
 public class MenuService implements IMenuService {
+    private final IConvertsData convertsData = new ConvertsData();
 
-    private IConvertsData convertsData = new ConvertsData();
+    @Autowired
+    private ILivroRepository repositoryLivro;
+    @Autowired
+    private IAutorRepository repositoryAutor;
+    @Autowired
+    private IIdiomaRepository repositoryIdioma;
 
     @Override
     public void buscarLivroPeloTitulo(Scanner scanner) {
@@ -51,26 +64,9 @@ public class MenuService implements IMenuService {
 //                            );
 
                     System.out.println("Registrar livros encontrados (Sim/Não):");
-                    SimNao simNaoSalvar = ValidEnum.getValidEnumSimNao(scanner);
-                    if (String.valueOf(simNaoSalvar).equalsIgnoreCase("sim")) {
-
-                        List<Livro> listaLivros = new ArrayList<>();
-                        listBooks.forEach(e -> {
-                            Livro livro = new Livro(e);
-                            e.getAuthors().forEach(j -> {
-                                Autor autor = new Autor(j);
-                                livro.addAutor(autor);
-                            });
-                            e.getLanguages().forEach(k -> {
-                                Idioma idioma = new Idioma(k);
-                                livro.addIdioma(idioma);
-                            });
-                            listaLivros.add(livro);
-                        });
-                        listaLivros.forEach(System.out::println);
-
-//            Artista artista = new Artista(nome, tipo);
-//            repository.save(artista);
+                    SimNao simNaoRegistrar = ValidEnum.getValidEnumSimNao(scanner);
+                    if (String.valueOf(simNaoRegistrar).equalsIgnoreCase("sim")) {
+                        registrarLivros(listBooks);
                     }
 
                 } else {
@@ -87,4 +83,100 @@ public class MenuService implements IMenuService {
             }
         }
     }
+
+    public void registrarLivros(List<BookDtoData> listBooks) {
+
+        try {
+            boolean saveBooks = true;
+            listBooks.forEach(l -> {
+                Optional<Livro> searchLivro = repositoryLivro.findByTituloIgnoreCase(l.getTitle());
+                if (searchLivro.isEmpty()) {
+                    Livro livro = new Livro();
+                    livro.setTitulo(l.getTitle());
+                    livro.setQuantidadeDownload(l.getDownloadCount());
+
+                    l.getAuthors().forEach(a -> {
+                        Optional<Autor> searchAutor = repositoryAutor.findByNomeIgnoreCase(a.getName());
+                        Autor autor = searchAutor.orElseGet(() -> new Autor(a.getName(), a.getBirthYear(), a.getDeathYear()));
+                        livro.addAutor(autor);
+                    });
+
+                    l.getLanguages().forEach(i -> {
+                        Optional<Idioma> searchIdioma = repositoryIdioma.findByIdiomaIgnoreCase(i.getLanguage());
+                        Idioma idioma = searchIdioma.orElseGet(() -> new Idioma(i.getLanguage()));
+                        livro.addIdioma(idioma);
+                    });
+
+                    repositoryLivro.save(livro);
+                    System.out.println("Livro '%s' registrado com sucesso!".formatted(l.getTitle()));
+                } else {
+                    System.out.println("Livro '%s' já registrados anteriormente!".formatted(l.getTitle()));
+                }
+            });
+        } catch (Exception ignored) {
+            System.out.println("Erro ao registrar livros!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarLivrosRegistrados() {
+        List<Livro> livros = repositoryLivro.findAll();
+        if (!livros.isEmpty()) {
+            livros.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum livro registrado!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarAuroresRegistrados() {
+        List<Autor> autores = repositoryAutor.findAll();
+        if (!autores.isEmpty()) {
+            autores.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum autor registrado!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarAutoresVivosEmUmDeterminadoAno(Scanner scanner) {
+        System.out.println("Informe o ano:");
+        Integer anoAtual = Integer.valueOf(Year.now().toString());
+        Integer ano = ValidNumber.getValidInteger(scanner, anoAtual);
+        List<Autor> autores = repositoryAutor
+                .findByAnoNascimentoLessThanEqualAndAnoFalecimentoGreaterThanEqual(ano, ano);
+        if (!autores.isEmpty()) {
+            autores.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum autor encontrado!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarLivrosEmUmDeterminadoIdioma(Scanner scanner) {
+        System.out.println("Informe o idioma (Siglas - Ex.: pt|en|es|fr):");
+        String idioma = ValidString.getValidString(scanner, 2);
+        List<Livro> livros = repositoryLivro.findByIdiomas(idioma);
+        if (!livros.isEmpty()) {
+            livros.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum livro registrado!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarTop5LivrosMaisBaixados() {
+        List<Livro> livros = repositoryLivro.findTop2ByOrderByQuantidadeDownloadDesc();
+        if (!livros.isEmpty()) {
+            livros.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum livro registrado!");
+        }
+    }
+
 }

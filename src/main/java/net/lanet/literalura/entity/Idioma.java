@@ -17,7 +17,8 @@ public class Idioma {
     @Column(name="idioma", nullable = false, unique = true)
     private String idioma;
 
-    @ManyToMany(mappedBy = "idiomas", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "idiomas",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Livro> livros = new ArrayList<>();
 
 
@@ -28,6 +29,8 @@ public class Idioma {
     public Idioma(LanguageDtoData model) {
         this.idioma = model.getLanguage();
     }
+    public Idioma(Idioma model) { this.idioma = model.getIdioma(); }
+
 
     public Long getId() {
         return id;
@@ -50,4 +53,5 @@ public class Idioma {
     public void setLivros(List<Livro> livros) {
         this.livros = livros;
     }
+
 }

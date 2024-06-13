@@ -22,16 +22,16 @@ public class Livro {
     @Column(name="quantidade_download")
     private Integer quantidadeDownload;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "tb_livro_autor",
+            name = "tb_livros_autores",
             joinColumns = @JoinColumn(name = "livro_id"),
             inverseJoinColumns = @JoinColumn(name = "autor_id"))
     private List<Autor> autores = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "tb_livro_idioma",
+            name = "tb_livros_idiomas",
             joinColumns = @JoinColumn(name = "livro_id"),
             inverseJoinColumns = @JoinColumn(name = "idioma_id"))
     private List<Idioma> idiomas = new ArrayList<>();
@@ -50,6 +50,12 @@ public class Livro {
     public Livro(BookDtoData model) {
         this.titulo = model.getTitle();
         this.quantidadeDownload = model.getDownloadCount();
+    }
+    public Livro(Livro model) {
+        this.titulo = model.getTitulo();
+        this.quantidadeDownload = model.getQuantidadeDownload();
+        this.autores = model.getAutores();
+        this.idiomas = model.getIdiomas();
     }
 
     @Override
@@ -94,14 +100,10 @@ public class Livro {
         this.autores = autores;
     }
     public void addAutor(Autor autor) {
-        if (!autor.getLivros().contains(this)) {
-            this.autores.add(autor);
-        }
+        this.autores.add(autor);
     }
     public void removeAutor(Autor autor) {
-        if (!autor.getLivros().contains(this)) {
-            this.autores.remove(autor);
-        }
+        this.autores.remove(autor);
     }
 
     public List<Idioma> getIdiomas() {
@@ -112,14 +114,10 @@ public class Livro {
         this.idiomas = idiomas;
     }
     public void addIdioma(Idioma idioma) {
-        if (!idioma.getLivros().contains(this)) {
-            this.idiomas.add(idioma);
-        }
+        this.idiomas.add(idioma);
     }
     public void removeIdioma(Idioma idioma) {
-        if (!idioma.getLivros().contains(this)) {
-            this.idiomas.remove(idioma);
-        }
+        this.idiomas.remove(idioma);
     }
 
 }

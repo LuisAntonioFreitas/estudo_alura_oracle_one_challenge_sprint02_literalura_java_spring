@@ -6,6 +6,8 @@ import net.lanet.literalura.dto.AuthorDtoData;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.lanet.literalura.main.Main.DISPLAY_AUTORES;
+
 @Entity
 @Table(name="tb_autores", indexes = {
         @Index(name = "idx_nome", columnList = "nome") })
@@ -21,7 +23,8 @@ public class Autor {
     @Column(name="ano_falecimento")
     private Integer anoFalecimento;
 
-    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "autores",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Livro> livros = new ArrayList<>();
 
 
@@ -37,6 +40,20 @@ public class Autor {
         this.nome = model.getName();
         this.anoNascimento = model.getBirthYear();
         this.anoFalecimento = model.getDeathYear();
+    }
+    public Autor(Autor model) {
+        this.nome = model.getNome();
+        this.anoNascimento = model.getAnoNascimento();
+        this.anoFalecimento = model.getAnoFalecimento();
+    }
+
+    @Override
+    public String toString() {
+        return DISPLAY_AUTORES.formatted(
+                this.nome,
+                this.anoNascimento,
+                this.anoFalecimento
+        );
     }
 
     public Long getId() {

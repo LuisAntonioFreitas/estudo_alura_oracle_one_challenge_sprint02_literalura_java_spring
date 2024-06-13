@@ -13,8 +13,5 @@ public class LanguageDtoData {
         this.language = language;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
+    public String getLanguage() { return language; }
 }
