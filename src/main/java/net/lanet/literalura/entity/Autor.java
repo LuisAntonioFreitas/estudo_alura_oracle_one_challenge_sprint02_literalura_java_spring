@@ -5,6 +5,7 @@ import net.lanet.literalura.dto.AuthorDtoData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static net.lanet.literalura.main.Main.DISPLAY_AUTORES;
 
@@ -52,7 +53,8 @@ public class Autor {
         return DISPLAY_AUTORES.formatted(
                 this.nome,
                 this.anoNascimento,
-                this.anoFalecimento
+                this.anoFalecimento,
+                this.livros.stream().map(e -> e.getTitulo()).collect(Collectors.joining(" | "))
         );
     }
 

@@ -25,7 +25,8 @@ public class Main {
             ----- AUTOR -----
             Nome       : %s
             Nascimento : %d
-            Falecimento: %d""";
+            Falecimento: %d
+            Livro(s)   : %s""";
 
     public void viewMenu() {
 
@@ -39,10 +40,12 @@ public class Main {
             *  4  |  Listar autores vivos em um determinado ano *
             *  5  |  Listar livros em um determinado idioma     *
             *  6  |  Listar Top 5 livros mais baixados          *
-            *  7  |  Sair                                       *
+            *  7  |  Buscar livros registrados                  *
+            *  8  |  Buscar autores registrados                 *
+            *  9  |  Sair                                       *
             *****************************************************
             Escolha um número válido nas opções:""";
-        final int OPTIONS_LIMIT = 7;
+        final int OPTIONS_LIMIT = 9;
 
         int optionMenu = 0;
         while (optionMenu != OPTIONS_LIMIT) {
@@ -77,6 +80,14 @@ public class Main {
                     menuService.listarTop5LivrosMaisBaixados();
                     break;
                 case 7:
+                    // Buscar livros registrados
+                    menuService.buscarLivrosRegistrados(scanner);
+                    break;
+                case 8:
+                    // Buscar autores registrados
+                    menuService.buscarAutoresRegistrados(scanner);
+                    break;
+                case 9:
                     // Sair;
                     System.out.println("Aplicação finalizada!");
                     scanner.close();

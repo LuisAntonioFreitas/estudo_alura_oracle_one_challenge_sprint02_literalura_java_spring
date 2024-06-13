@@ -13,4 +13,6 @@ public interface IMenuService {
     void listarAutoresVivosEmUmDeterminadoAno(Scanner scanner);
     void listarLivrosEmUmDeterminadoIdioma(Scanner scanner);
     void listarTop5LivrosMaisBaixados();
+    void buscarLivrosRegistrados(Scanner scanner);
+    void buscarAutoresRegistrados(Scanner scanner);
 }

@@ -160,7 +160,18 @@ public class MenuService implements IMenuService {
     public void listarLivrosEmUmDeterminadoIdioma(Scanner scanner) {
         System.out.println("Informe o idioma (Siglas - Ex.: pt|en|es|fr):");
         String idioma = ValidString.getValidString(scanner, 2);
-        List<Livro> livros = repositoryLivro.findByIdiomas(idioma);
+        List<Livro> livros = repositoryLivro.queryFindByIdioma(idioma);
+        if (!livros.isEmpty()) {
+            livros.forEach(System.out::println);
+        } else {
+            System.out.println("Nenhum livro encontrado!");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void listarTop5LivrosMaisBaixados() {
+        List<Livro> livros = repositoryLivro.findTop5ByOrderByQuantidadeDownloadDesc();
         if (!livros.isEmpty()) {
             livros.forEach(System.out::println);
         } else {
@@ -170,12 +181,45 @@ public class MenuService implements IMenuService {
 
     @Override
     @Transactional(readOnly = true)
-    public void listarTop5LivrosMaisBaixados() {
-        List<Livro> livros = repositoryLivro.findTop2ByOrderByQuantidadeDownloadDesc();
-        if (!livros.isEmpty()) {
-            livros.forEach(System.out::println);
-        } else {
-            System.out.println("Nenhum livro registrado!");
+    public void buscarLivrosRegistrados(Scanner scanner) {
+        boolean searchPlus = true;
+        while (searchPlus) {
+            System.out.println("Informe o título do livro:");
+            String titulo = ValidString.getValidString(scanner, 100);
+            List<Livro> livros = repositoryLivro.findByTituloContainingIgnoreCase(titulo);
+            if (!livros.isEmpty()) {
+                livros.forEach(System.out::println);
+            } else {
+                System.out.println("Nenhum livro encontrado!");
+            }
+
+            System.out.println("Buscar outro livro (Sim/Não):");
+            SimNao simNaoBuscar = ValidEnum.getValidEnumSimNao(scanner);
+            if (String.valueOf(simNaoBuscar).equalsIgnoreCase("nao")) {
+                searchPlus = false;
+            }
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void buscarAutoresRegistrados(Scanner scanner) {
+        boolean searchPlus = true;
+        while (searchPlus) {
+            System.out.println("Informe o nome do autor:");
+            String nome = ValidString.getValidString(scanner, 100);
+            List<Autor> autores = repositoryAutor.findByNomeContainingIgnoreCase(nome);
+            if (!autores.isEmpty()) {
+                autores.forEach(System.out::println);
+            } else {
+                System.out.println("Nenhum autor encontrado!");
+            }
+
+            System.out.println("Buscar outro autor (Sim/Não):");
+            SimNao simNaoBuscar = ValidEnum.getValidEnumSimNao(scanner);
+            if (String.valueOf(simNaoBuscar).equalsIgnoreCase("nao")) {
+                searchPlus = false;
+            }
         }
     }
 
